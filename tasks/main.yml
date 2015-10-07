@@ -1,0 +1,16 @@
+- name: modify repository
+  apt_repository:
+    repo: 'deb http://dl.bintray.com/rundeck/rundeck-deb /'
+    state: present
+
+- name: install
+  apt:
+    name: "rundeck={{ version }}*"
+    state: present
+    force: yes
+
+- name: rundeckd is enabled
+  service:
+    name: rundeckd
+    state: started
+    enabled: yes
