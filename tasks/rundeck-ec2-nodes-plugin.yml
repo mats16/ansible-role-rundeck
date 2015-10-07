@@ -1,0 +1,5 @@
+- name: download rundeck-ec2-nodes-plugin
+  get_url:
+    url: "https://github.com/rundeck-plugins/rundeck-ec2-nodes-plugin/releases/download/{{ ec2_nodes_plugin_version }}/rundeck-ec2-nodes-plugin-{{ ec2_nodes_plugin_version }}.jar"
+    dest: "/var/lib/rundeck/libext/rundeck-ec2-nodes-plugin-{{ ec2_nodes_plugin_version }}.jar"
+    mode: 0644

@@ -9,6 +9,8 @@
     state: present
     force: yes
 
+- include: rundeck-ec2-nodes-plugin.yml
+
 - name: rundeckd is enabled
   service:
     name: rundeckd
