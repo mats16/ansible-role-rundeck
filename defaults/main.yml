@@ -1,3 +1,4 @@
 version: "2.5.3"
 
-ec2_nodes_plugin_version: "1.5"
+plugins:
+  - { name: rundeck-ec2-nodes-plugin, version: "1.5" }

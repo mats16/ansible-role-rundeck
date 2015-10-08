@@ -9,7 +9,12 @@
     state: present
     force: yes
 
-- include: rundeck-ec2-nodes-plugin.yml
+- name: download plugins
+  get_url:
+    url: "https://github.com/rundeck-plugins/{{ item.name }}/releases/download/{{ item.version }}/{{ item.name }}-{{ item.version }}.jar"
+    dest: "/var/lib/rundeck/libext/{{ item.name }}-{{ item.version }}.jar"
+    mode: 0644
+  with_items: plugins
 
 - name: rundeckd is enabled
   service:
