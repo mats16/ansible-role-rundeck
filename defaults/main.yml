@@ -1,4 +1,15 @@
-version: "2.5.3"
+version: "2.6.0"
 
 plugins:
-  - { name: rundeck-ec2-nodes-plugin, version: "1.5" }
+  - "https://github.com/rundeck-plugins/rundeck-ec2-nodes-plugin/releases/download/v1.5.1/rundeck-ec2-nodes-plugin-1.5.1.jar"
+  - "https://github.com/rundeck-plugins/rundeck-s3-log-plugin/releases/download/v1.0.0/rundeck-s3-log-plugin-1.0.0.jar"
+  - "https://github.com/higanworks/rundeck-slack-incoming-webhook-plugin/releases/download/v0.3.dev/rundeck-slack-incoming-webhook-plugin-0.3.jar"
+
+framework:
+  server:
+    name: localhost
+    hostname: localhost
+    port: 4440
+    url: "http://localhost:4440"
+    username: admin
+    password: admin

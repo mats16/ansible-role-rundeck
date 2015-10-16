@@ -11,8 +11,8 @@
 
 - name: download plugins
   get_url:
-    url: "https://github.com/rundeck-plugins/{{ item.name }}/releases/download/{{ item.version }}/{{ item.name }}-{{ item.version }}.jar"
-    dest: "/var/lib/rundeck/libext/{{ item.name }}-{{ item.version }}.jar"
+    url: "{{ item }}"
+    dest: "/var/lib/rundeck/libext/{{ item.split('/')[-1] }}"
     mode: 0644
   with_items: plugins
 
