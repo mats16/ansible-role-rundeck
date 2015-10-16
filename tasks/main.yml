@@ -15,6 +15,7 @@
     dest: "/var/lib/rundeck/libext/{{ item.split('/')[-1] }}"
     mode: 0644
   with_items: plugins
+  notify: restart rundeckd
 
 - name: modify config
   template:
@@ -26,6 +27,7 @@
   with_items:
     - framework.properties
     - rundeck-config.properties
+  notify: restart rundeckd
 
 - name: rundeckd is enabled
   service:
