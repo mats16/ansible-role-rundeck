@@ -1,2 +1,2 @@
 dependencies:
-  - role: java7
+  - role: java8
