@@ -25,6 +25,7 @@
     group: rundeck
     mode: 0640
   with_items:
+    - profile
     - framework.properties
     - rundeck-config.properties
   notify: restart rundeckd
