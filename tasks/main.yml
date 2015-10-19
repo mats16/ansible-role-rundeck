@@ -5,7 +5,7 @@
 
 - name: install
   apt:
-    name: "rundeck={{ version }}*"
+    name: "rundeck={{ rundeck_version }}*"
     state: present
     force: yes
 
@@ -14,7 +14,7 @@
     url: "{{ item }}"
     dest: "/var/lib/rundeck/libext/{{ item.split('/')[-1] }}"
     mode: 0644
-  with_items: plugins
+  with_items: rundeck_plugins
   notify: restart rundeckd
 
 - name: modify config
