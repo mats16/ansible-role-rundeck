@@ -1,2 +1,4 @@
 dependencies:
-  - role: java8
+  - { role: java8 }
+  - { role: nginx }
+  - { role: mariadb-server, when: "rd_mysql_host == 'localhost'" }
