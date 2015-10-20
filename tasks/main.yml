@@ -31,6 +31,7 @@
     - profile
     - framework.properties
     - rundeck-config.properties
+    - realm.properties
   notify: restart rundeckd
 
 - name: rundeckd is enabled
