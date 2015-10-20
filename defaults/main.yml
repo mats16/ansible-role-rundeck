@@ -6,7 +6,6 @@ rundeck_plugins:
   - "https://github.com/higanworks/rundeck-slack-incoming-webhook-plugin/releases/download/v0.3.dev/rundeck-slack-incoming-webhook-plugin-0.3.jar"
 
 # framework.properties
-framework_server_hostname: localhost
 framework_server_port: 4440
 framework_server_url: "http://localhost:4440"
 framework_server_username: admin
