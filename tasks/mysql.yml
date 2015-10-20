@@ -19,7 +19,8 @@
 
 - name: modify mysql user
   mysql_user:
-    host: "{{ rd_mysql_host }}"
+    login_host: "{{ rd_mysql_host }}"
+    host: "%"
     name: "{{ rd_mysql_user }}"
     password: "{{ rd_mysql_password }}"
     priv: "{{ rd_mysql_database }}.*:ALL"
