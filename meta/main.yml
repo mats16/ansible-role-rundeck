@@ -1,4 +1,15 @@
+galaxy_info:
+  author: mats116
+  description: "Rundeck installer"
+  license: MIT
+  min_ansible_version: 1.9
+  platforms:
+    - name: Ubuntu
+      versions:
+        - trusty
+  galaxy_tags:
+    - rundeck
 dependencies:
-  - { role: java8 }
-  - { role: nginx }
-  - { role: mariadb-server, when: "rd_mysql_host == 'localhost'" }
+  - { role: mats116.nginx }
+  - { role: mats116.java8 }
+  - { role: mats116.mariadb-server, when: "rd_mysql_host == 'localhost'" }
