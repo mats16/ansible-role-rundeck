@@ -34,6 +34,14 @@
     - realm.properties
   notify: restart rundeckd
 
+- name: modify directory permission
+  file:
+    path: /etc/rundeck
+    state: directory
+    owner: rundeck
+    group: rundeck
+    recurse: yes
+
 - name: rundeckd is enabled
   service:
     name: rundeckd
