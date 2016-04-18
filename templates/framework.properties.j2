@@ -5,15 +5,15 @@
 # Rundeck server connection information
 # ----------------------------------------------------------------
 
-framework.server.name = localhost
-framework.server.hostname = localhost
+framework.server.name = {{ framework_server_name }}
+framework.server.hostname = {{ framework_server_hostname }}
 framework.server.port = {{ framework_server_port }}
 framework.server.url = {{ framework_server_url }}
 # Username/password used by CLI tools.
 framework.server.username = {{ framework_server_username }}
 framework.server.password = {{ framework_server_password }}
 
-rundeck.server.uuid = 00000000-0000-0000-0000-000000000000
+rundeck.server.uuid = {{ rundeck_server_uuid }}
 
 # ----------------------------------------------------------------
 # Installation locations

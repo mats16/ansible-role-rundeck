@@ -22,7 +22,7 @@
 
 - name: modify config
   template:
-    src: "{{ item }}"
+    src: "{{ item }}.j2"
     dest: "/etc/rundeck/{{ item }}"
     owner: rundeck
     group: rundeck
@@ -32,6 +32,8 @@
     - framework.properties
     - rundeck-config.properties
     - realm.properties
+    - jaas-loginmodule.conf
+    - log4j.properties
   notify: restart rundeckd
 
 - name: modify directory permission
