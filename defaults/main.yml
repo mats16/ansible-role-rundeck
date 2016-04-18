@@ -29,6 +29,14 @@ rd_mysql_database: rundeck
 rd_mysql_user: rundeck
 rd_mysql_password: rundeck
 
+# E-mail configuration
+rd_email_default_to: root
+rd_email_from: root@localhost
+rd_email_host: localhost
+rd_email_port: 25
+rd_email_user: x
+rd_email_password: y
+
 # Nginx
 rd_nginx_accesslog: /var/log/nginx/rundeck-access.log
 

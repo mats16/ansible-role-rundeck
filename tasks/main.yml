@@ -30,7 +30,7 @@
   with_items:
     - profile
     - framework.properties
-    - rundeck-config.properties
+    - rundeck-config.groovy
     - realm.properties
     - jaas-loginmodule.conf
     - log4j.properties

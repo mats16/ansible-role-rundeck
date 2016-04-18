@@ -32,6 +32,26 @@ framework.logs.dir=/var/lib/rundeck/logs
 framework.libext.dir=/var/lib/rundeck/libext
 
 # ----------------------------------------------------------------
+# Email settings
+# ----------------------------------------------------------------
+# recipient addresses to send email (comma separated)
+framework.email.tolist = {{ rd_email_default_to }}
+# email address appearing in message "from" field
+framework.email.from = {{ rd_email_from }}
+# email address replies should go
+framework.email.replyto = {{ rd_email_from }}
+
+# The rdeck email relay host. must be a functioning smtp relay server
+framework.email.mailhost = {{ rd_email_host }}
+framework.email.mailport = {{ rd_email_port }}
+
+# User/pass info if the smtp server requires it
+framework.email.user = {{ rd_email_user }}
+framework.email.password = {{ rd_email_password }}
+framework.email.ssl = true
+framework.email.failonerror = true
+
+# ----------------------------------------------------------------
 # SSH defaults for node executor and file copier
 # ----------------------------------------------------------------
 
