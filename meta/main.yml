@@ -9,7 +9,3 @@ galaxy_info:
         - trusty
   galaxy_tags:
     - rundeck
-dependencies:
-  - { role: mats116.nginx }
-  - { role: mats116.java8 }
-  - { role: mats116.mariadb-server, when: "rd_mysql_host == 'localhost'" }
