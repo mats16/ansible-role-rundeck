@@ -36,6 +36,15 @@
     - log4j.properties
   notify: restart rundeckd
 
+- name: modify name of default user role
+  replace:
+    dest: /var/lib/rundeck/exp/webapp/WEB-INF/web.xml
+    regexp: "<role-name>user</role-name>"
+    replace: "<role-name>{{ rd_default_group_name }}</role-name>"
+    backup: yes
+  when: rd_default_group_name is defined
+  notify: restart rundeckd
+
 - name: modify directory permission
   file:
     path: /etc/rundeck

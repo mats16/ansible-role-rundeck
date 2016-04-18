@@ -31,3 +31,5 @@ rd_mysql_password: rundeck
 
 # Nginx
 rd_nginx_accesslog: /var/log/nginx/rundeck-access.log
+
+rd_default_group_name: user

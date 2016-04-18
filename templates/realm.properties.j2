@@ -22,6 +22,6 @@
 #
 # This sets the default user accounts for the Rundeck app
 #
-admin:MD5:{{ admin_password|hash('md5') }},admin
+admin:MD5:{{ admin_password|hash('md5') }},admin,{{rd_default_group_name}}
 #@jetty.user.deploy.name@:@jetty.user.deploy.password@,user,deploy
 #@jetty.user.build.name@:@jetty.user.build.password@,user,build
