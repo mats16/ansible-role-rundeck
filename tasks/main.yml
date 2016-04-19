@@ -36,6 +36,17 @@
     - log4j.properties
   notify: restart rundeckd
 
+- name: modify default policies
+  template:
+    src: "{{ item }}.j2"
+    dest: "/etc/rundeck/{{ item }}"
+    owner: rundeck
+    group: rundeck
+    mode: 0640
+  with_items:
+    - admin.aclpolicy
+    - RundeckAdmin.aclpolicy
+
 - name: modify name of default user role
   replace:
     dest: /var/lib/rundeck/exp/webapp/WEB-INF/web.xml
