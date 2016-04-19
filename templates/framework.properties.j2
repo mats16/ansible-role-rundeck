@@ -74,3 +74,11 @@ framework.plugin.ExecutionFileStorage.org.rundeck.amazon-s3.path={{ rundeck_s3_p
 
 #  AWS region name
 framework.plugin.ExecutionFileStorage.org.rundeck.amazon-s3.region={{ rundeck_s3_region }}
+
+{% if hipchat_token %}
+# ----------------------------------------------------------------
+# Hipchat plugin configurations
+# ----------------------------------------------------------------
+framework.plugin.Notification.HipChatNotification.apiAuthToken={{ hipchat_token }}
+framework.plugin.Notification.HipChatNotification.messageTemplateLocation={{ hipchat_template }}
+{% endif %}

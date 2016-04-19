@@ -47,3 +47,7 @@ rd_create_projects: []
 
 # Users list
 rd_create_users: []
+
+# Hipchat configuration
+hipchat_token: null
+hipchat_template: /etc/rundeck/hipchat_default.ftl

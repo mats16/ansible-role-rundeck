@@ -41,7 +41,7 @@
     - log4j.properties
   notify: restart rundeckd
 
-- name: modify default policies
+- name: modify config that not require restart
   template:
     src: "{{ item }}.j2"
     dest: "/etc/rundeck/{{ item }}"
@@ -51,6 +51,7 @@
   with_items:
     - admin.aclpolicy
     - RundeckAdmin.aclpolicy
+    - hipchat_default.ftl
 
 - name: modify name of default user role
   replace:
