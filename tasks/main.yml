@@ -53,6 +53,14 @@
     - RundeckAdmin.aclpolicy
     - hipchat_default.ftl
 
+- name: put limits.d file
+  template:
+    src: limits.conf
+    dest: /etc/security/limits.d
+    owner: root
+    group: root
+    mode: 0644
+
 - name: modify name of default user role
   replace:
     dest: /var/lib/rundeck/exp/webapp/WEB-INF/web.xml
