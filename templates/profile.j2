@@ -11,6 +11,9 @@ RDECK_HTTPS_PORT=4443
 echo 65535 > /proc/sys/fs/file-max
 ulimit -n 65535
 
+# Force logs to be owned by rundeck
+chown -R rundeck. /var/log/rundeck/
+
 #
 # If JAVA_HOME is set, then add it to home and set JAVA_CMD to use the version specified in that
 # path.  JAVA_HOME can be set in the rundeck profile.  Or set in this file.
