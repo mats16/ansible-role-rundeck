@@ -12,6 +12,11 @@
     state: present
     force: yes
 
+- name: remove upstart scripts
+  file:
+    path: /etc/init/rundeckd.conf
+    state: absent
+
 - name: download plugins
   get_url:
     url: "{{ item }}"
@@ -83,5 +88,6 @@
     name: rundeckd
     state: started
     enabled: yes
+
 
 - include: projects.yml
