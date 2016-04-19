@@ -1,0 +1,89 @@
+description: Rundeck-{{ item }}-[Run, Read, Write] role aplication level access control.
+context:
+  application: 'rundeck'
+for:
+  project:
+    - match:
+        name: '{{ item }}'
+      allow: 'read'
+by:
+  group: [Rundeck-{{ item }}-Run, Rundeck-{{ item }}-Read, Rundeck-{{ item }}-Write]
+---
+
+
+description: Rundeck-{{ item }}-Run role project level access control.
+context:
+  project: '{{ item }}' # Only applied to project {{ item }}
+for:
+  resource:
+    - equals:
+        kind: job
+      allow: [read,run]
+    - equals:
+        kind: node
+      allow: [read, refresh]
+    - equals:
+        kind: event
+      allow: [read] # allow read events
+  adhoc:
+    - allow: [read] # deny running/killing adhoc jobs
+  job:
+    - match:
+        group: '.*'
+      allow: [read, run, kill]
+  node:
+    - allow: [read, run] # allow read/run for all nodes
+by:
+  group: Rundeck-{{ item }}-Run
+---
+
+
+description: Rundeck-{{ item }}-Read role project level access control.
+context:
+  project: '{{ item }}' # Only applied to project {{ item }}
+for:
+  resource:
+    - equals:
+        kind: job
+      allow: [read]
+    - equals:
+        kind: node
+      allow: [read]
+    - equals:
+        kind: event
+      allow: [read] # allow read events
+  adhoc:
+    - allow: [read] # deny running/killing adhoc jobs
+  job:
+    - match:
+        group: '.*'
+      allow: [read]
+  node:
+    - allow: [read] # allow read/run for all nodes
+by:
+  group: Rundeck-{{ item }}-Read
+---
+
+
+description: Rundeck-{{ item }}-Write role project level access control.
+context:
+  project: '{{ item }}' # Only applied to project {{ item }}
+for:
+  resource:
+    - equals:
+        kind: job
+      allow: '*'
+    - equals:
+        kind: node
+      allow: '*'
+    - equals:
+        kind: event
+      allow: '*'
+  adhoc:
+    - allow: '*'
+  job:
+    - allow: '*'
+  node:
+    - allow: '*'
+by:
+  group: Rundeck-{{ item }}-Write

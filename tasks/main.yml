@@ -74,3 +74,5 @@
     name: rundeckd
     state: started
     enabled: yes
+
+- include: projects.yml
