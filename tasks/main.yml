@@ -83,6 +83,12 @@
     group: rundeck
     recurse: yes
 
+- name: modify directory permission
+  file:
+    path: /var/lib/rundeck
+    state: directory
+    owner: rundeck
+
 - name: rundeckd is enabled
   service:
     name: rundeckd
