@@ -23,7 +23,6 @@
 - name: creating base directory for projects
   file:
     name: "/var/rundeck/projects/{{item}}"
-    recurse: yes
     state: directory
     owner: rundeck
     group: rundeck
