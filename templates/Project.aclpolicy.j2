@@ -6,6 +6,14 @@ for:
     - match:
         name: '{{ item }}'
       allow: 'read'
+  storage:
+    - match:
+        name: '.*'
+      deny: [delete] # Deny delete in files storage
+    - match:
+        name: '.*'
+      allow: [read] # allow read for /ssh-key/* storage content
+
 by:
   group: [Rundeck-{{ item }}-Run, Rundeck-{{ item }}-Read, Rundeck-{{ item }}-Write]
 ---
