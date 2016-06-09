@@ -23,6 +23,12 @@ rundeck_s3_region: ap-northeast-1
 dataSource_dbCreate: update
 rundeck_clusterMode_enabled: "true"
 
+# webapp WEB-INF path
+rundeck_webapp_webinf_path: /var/lib/rundeck/exp/webapp/WEB-INF
+
+# session config
+rundeck_session_timeout: 30
+
 # MySQL
 rd_mysql_host: localhost
 rd_mysql_database: rundeck

@@ -95,5 +95,12 @@
     state: started
     enabled: yes
 
+- name: set session timeout
+  replace:
+    dest: "{{ rundeck_webapp_webinf_path }}/web.xml"
+    regexp: '\<session\-timeout\>[0-9]+\<\/session\-timeout\>'
+    replace: "<session-timeout>{{ rundeck_session_timeout }}</session-timeout>"
+  notify: restart rundeckd
+  tags: rundeck-session-timeout
 
 - include: projects.yml
