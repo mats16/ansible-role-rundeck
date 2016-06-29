@@ -1,0 +1,49 @@
+description: API project level access control
+context:
+  project: '.*' # all projects
+for:
+  resource:
+    - equals:
+        kind: job
+      allow: [read,run]
+    - equals:
+        kind: node
+      allow: [read, refresh]
+    - equals:
+        kind: event
+      allow: [read] # allow read events
+  adhoc:
+    - allow: [read] # deny running/killing adhoc jobs
+  job:
+    - match:
+        group: '.*'
+      allow: [read, run, kill]
+  node:
+    - allow: [read, run] # allow read/run for all nodes
+by:
+  group: api_token_group
+
+---
+
+description: API Application level access control
+context:
+  application: 'rundeck'
+for:
+  resource:
+    - equals:
+        kind: user
+      allow: [admin] # allow modify user profiles
+  project:
+    - match:
+        name: '.*'
+      allow: 'read'
+  storage:
+    - match:
+        name: '.*'
+      deny: [delete] # Deny delete in files storage
+    - match:
+        name: '.*'
+      allow: [read] # allow read for /ssh-key/* storage content
+
+by:
+  group: api_token_group
