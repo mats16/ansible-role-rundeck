@@ -56,6 +56,7 @@
   with_items:
     - admin.aclpolicy
     - RundeckAdmin.aclpolicy
+    - api_token_group.aclpolicy
     - hipchat_default.ftl
 
 - name: put limits.d file
