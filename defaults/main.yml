@@ -57,3 +57,6 @@ rd_create_users: []
 # Hipchat configuration
 hipchat_token: null
 hipchat_template: /etc/rundeck/hipchat_default.ftl
+
+# Rundeck TMPDIR
+rundeck_tmpdir: /tmp/rundeck
