@@ -1,0 +1,66 @@
+description: Rundeck-Admin role project level access control.
+context:
+  project: '.*' # all projects
+for:
+  resource:
+    - equals:
+        kind: job
+      allow: [create, delete] # allow create jobs
+    - equals:
+        kind: node
+      allow: [read,create,update,refresh] # allow refresh node sources
+    - equals:
+        kind: event
+      allow: [read,create] # allow read/create events
+  adhoc:
+    - allow: [read,run,runAs,kill,killAs] # allow running/killing adhoc jobs
+  job:
+    - allow: [create,read,update,delete,run,runAs,kill,killAs,toggle_schedule,toggle_execution] # allow create/read/write/delete/run/kill of all jobs
+  node:
+    - allow: [read,run] # allow read/run for nodes
+by:
+  group: Rundeck-Admin
+
+---
+
+description: Rundeck-Admin role aplication level access control.
+context:
+  application: 'rundeck'
+for:
+  resource:
+    - equals:
+        kind: project
+      deny: [create] # deny create of projects
+    - equals:
+        kind: system
+      allow: [read,enable_executions,disable_executions,admin] # allow read of system info, enable/disable all executions
+    - equals:
+        kind: system_acl
+      allow: [read] # only read system acl
+    - equals:
+        kind: user
+      allow: [admin] # allow modify user profiles
+    - equals:
+        kind: job
+      allow: [admin] # allow Manage job schedules
+  project:
+    - match:
+        name: '.*'
+      deny: [delete_execution,delete] # Deny delete of executions and projects
+    - match:
+        name: '.*'
+      allow: [read,import,export,configure,admin] # allow full access of all projects or use 'admin'
+  project_acl:
+    - match:
+        name: '.*'
+      allow: [read,create,update,delete,admin] # allow modifying project-specific ACL files
+  storage:
+    - match:
+        name: '.*'
+      deny: [delete] # Deny delete in files storage
+    - match:
+        name: '.*'
+      allow: [read,create,update] # allow access for /ssh-key/* storage content
+
+by:
+  group: Rundeck-Admin

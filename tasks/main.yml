@@ -12,6 +12,11 @@
     state: present
     force: yes
 
+- name: remove upstart scripts
+  file:
+    path: /etc/init/rundeckd.conf
+    state: absent
+
 - name: download plugins
   get_url:
     url: "{{ item }}"
@@ -20,9 +25,14 @@
   with_items: rundeck_plugins
   notify: restart rundeckd
 
+- name: Remove default properties file
+  file:
+    path: /etc/rundeck/rundeck-config.properties
+    state: absent
+
 - name: modify config
   template:
-    src: "{{ item }}"
+    src: "{{ item }}.j2"
     dest: "/etc/rundeck/{{ item }}"
     owner: rundeck
     group: rundeck
@@ -30,8 +40,40 @@
   with_items:
     - profile
     - framework.properties
-    - rundeck-config.properties
+    - rundeck-config.groovy
     - realm.properties
+    - jaas-loginmodule.conf
+    - log4j.properties
+  notify: restart rundeckd
+
+- name: modify config that not require restart
+  template:
+    src: "{{ item }}.j2"
+    dest: "/etc/rundeck/{{ item }}"
+    owner: rundeck
+    group: rundeck
+    mode: 0640
+  with_items:
+    - admin.aclpolicy
+    - RundeckAdmin.aclpolicy
+    - apitoken.aclpolicy
+    - hipchat_default.ftl
+
+- name: put limits.d file
+  template:
+    src: limits.conf
+    dest: /etc/security/limits.d
+    owner: root
+    group: root
+    mode: 0644
+
+- name: modify name of default user role
+  replace:
+    dest: /var/lib/rundeck/exp/webapp/WEB-INF/web.xml
+    regexp: "<role-name>user</role-name>"
+    replace: "<role-name>{{ rd_default_group_name }}</role-name>"
+    backup: yes
+  when: rd_default_group_name is defined
   notify: restart rundeckd
 
 - name: modify directory permission
@@ -42,8 +84,24 @@
     group: rundeck
     recurse: yes
 
+- name: modify directory permission
+  file:
+    path: /var/lib/rundeck
+    state: directory
+    owner: rundeck
+
 - name: rundeckd is enabled
   service:
     name: rundeckd
     state: started
     enabled: yes
+
+- name: set session timeout
+  replace:
+    dest: "{{ rundeck_webapp_webinf_path }}/web.xml"
+    regexp: '\<session\-timeout\>[0-9]+\<\/session\-timeout\>'
+    replace: "<session-timeout>{{ rundeck_session_timeout }}</session-timeout>"
+  notify: restart rundeckd
+  tags: rundeck-session-timeout
+
+- include: projects.yml

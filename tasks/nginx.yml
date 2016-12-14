@@ -1,7 +1,7 @@
 - name: modify nginx config
   template:
-    src: nginx/rundeck.conf
-    dest: /etc/nginx/conf.d/rundeck.conf
+    src: nginx/rundeck.conf.j2
+    dest: /etc/nginx/sites-enabled/rundeck.conf
     owner: root
     group: root
     mode: 0644

@@ -1,0 +1,30 @@
+---
+- name: Run rd-project if project directory not exists in file system
+  command: "/usr/bin/rd-project -p {{item}} -a create -v"
+  args:
+    chdir: /var/rundeck/
+    creates: "/var/rundeck/projects/{{item}}"
+  environment:
+    RUNDECK_URL: "{{framework_server_url}}"
+    RUNDECK_USER: "{{framework_server_username}}"
+    RUNDECK_PASS: "{{admin_password}}"
+  with_items: rd_create_projects
+  ignore_errors: true
+
+- name: Create acl for projects
+  template:
+    src: project.aclpolicy.j2
+    dest: "/etc/rundeck/{{ item }}.aclpolicy"
+    owner: rundeck
+    group: rundeck
+    mode: 0640
+  with_items: rd_create_projects
+
+- name: creating base directory for projects
+  file:
+    name: "/var/rundeck/projects/{{item}}"
+    state: directory
+    owner: rundeck
+    group: rundeck
+    mode: '0775'
+  with_items: rd_create_projects
