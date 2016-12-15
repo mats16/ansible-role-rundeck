@@ -8,7 +8,7 @@
     RUNDECK_URL: "{{framework_server_url}}"
     RUNDECK_USER: "{{framework_server_username}}"
     RUNDECK_PASS: "{{admin_password}}"
-  with_items: rd_create_projects
+  with_items: "{{ rd_create_projects }}"
   ignore_errors: true
 
 - name: Create acl for projects
@@ -18,7 +18,7 @@
     owner: rundeck
     group: rundeck
     mode: 0640
-  with_items: rd_create_projects
+  with_items: "{{ rd_create_projects }}"
 
 - name: creating base directory for projects
   file:
@@ -27,4 +27,4 @@
     owner: rundeck
     group: rundeck
     mode: '0775'
-  with_items: rd_create_projects
+  with_items: "{{ rd_create_projects }}"
