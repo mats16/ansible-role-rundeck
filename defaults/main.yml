@@ -5,6 +5,8 @@ rundeck_plugins:
   - "https://github.com/rundeck-plugins/rundeck-s3-log-plugin/releases/download/v1.0.0/rundeck-s3-log-plugin-1.0.0.jar"
   - "https://github.com/higanworks/rundeck-slack-incoming-webhook-plugin/releases/download/v0.3.dev/rundeck-slack-incoming-webhook-plugin-0.3.jar"
 
+rundeck_plugins_removed: []
+
 # framework.properties
 framework_server_port: 4440
 framework_server_url: "http://localhost:4440"
