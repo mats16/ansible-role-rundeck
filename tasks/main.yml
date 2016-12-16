@@ -25,6 +25,13 @@
   with_items: "{{ rundeck_plugins }}"
   notify: restart rundeckd
 
+- name: remove plugins
+  file:
+    path: "/var/lib/rundeck/libext/{{ item |d(omit) }}"
+    state: absent
+  with_items: "{{ rundeck_plugins_removed }}"
+  notify: restart rundeckd
+
 - name: Remove default properties file
   file:
     path: /etc/rundeck/rundeck-config.properties
