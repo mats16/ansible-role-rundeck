@@ -22,7 +22,7 @@
     url: "{{ item }}"
     dest: "/var/lib/rundeck/libext/{{ item.split('/')[-1] }}"
     mode: 0644
-  with_items: rundeck_plugins
+  with_items: "{{ rundeck_plugins }}"
   notify: restart rundeckd
 
 - name: Remove default properties file
