@@ -95,3 +95,15 @@ for:
     - allow: '*'
 by:
   group: Rundeck-{{ item }}-Write
+---
+
+description: Rundeck-{{ item }}-Admin role project level access control.
+context:
+  application: 'rundeck'
+for:
+  project:
+    - match:
+        name: '{{ item }}'
+      allow: [read,import,export,configure,admin] # allow full access of all projects or use 'admin'
+by:
+  group: Rundeck-{{ item }}-Admin
