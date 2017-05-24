@@ -45,6 +45,35 @@ rd_mysql_password: rundeck
 
 # Nginx
 rd_nginx_accesslog: /var/log/nginx/rundeck-access.log
+
+# LDAP
+
+rd_login_module: ldap
+rd_ldap:
+    debug: "true"
+    contextfactory: com.sun.jndi.ldap.LdapCtxFactory
+    providerurl: ldap://server:389
+    bindn: cn=Manager,dc=example,dc=com
+    bindpassword: secret
+    authenticationmethod: simple
+    forcebindinglogin: "false"
+    userbasedn: cn=People,cn=test1,dc=example,dc=com
+    userrdnattribute: uid
+    useridattribute: uid
+    userpasswordattribute: userPassword
+    userobjectclass: account
+    rolebasedn: cn=Groups,cn=test1,dc=example,dc=com
+    rolenameattribute: cn
+    roleusernamememberattribute: memberUid
+    rolememberattribute: memberUid
+    roleobjectclass: posixGroup
+    supplementalroles: user
+    cachedurationmillis: 300000
+    reportstatistics: "true"
+    timeoutread: 10000
+    timeoutconnect: 20000
+    nestedgroups: "false"
+
 ```
 
 ## Dependencies

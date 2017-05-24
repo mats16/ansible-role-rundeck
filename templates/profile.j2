@@ -25,12 +25,14 @@ if [ ! -z $JAVA_HOME ]; then
     JAVA_CMD=$JAVA_HOME/bin/java
 fi
 
-
-
 export CLI_CP=$(find /var/lib/rundeck/cli -name \*.jar -printf %p:)
 export BOOTSTRAP_CP=$(find /var/lib/rundeck/bootstrap -name \*.jar -printf %p:)
 export RDECK_JVM="-Djava.security.auth.login.config=/etc/rundeck/jaas-loginmodule.conf \
+{% if rd_login_module == 'ldap' %}
+       -Dloginmodule.name=ldap \
+{% else %}
        -Dloginmodule.name=RDpropertyfilelogin \
+{% endif %}
        -Drdeck.config=/etc/rundeck \
        -Drdeck.base=/var/lib/rundeck \
        -Drundeck.server.configDir=/etc/rundeck \
