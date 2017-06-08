@@ -1,4 +1,4 @@
-description: Rundeck-{{ item }}-[Run, Read, Write] role aplication level access control.
+description: rundeck-{{ item }}-[run, read, write] role aplication level access control.
 context:
   application: 'rundeck'
 for:
@@ -15,11 +15,11 @@ for:
       allow: [read] # allow read for /ssh-key/* storage content
 
 by:
-  group: [Rundeck-{{ item }}-Run, Rundeck-{{ item }}-Read, Rundeck-{{ item }}-Write]
+  group: [rundeck-{{ item }}-run, rundeck-{{ item }}-read, rundeck-{{ item }}-write]
 ---
 
 
-description: Rundeck-{{ item }}-Run role project level access control.
+description: rundeck-{{ item }}-run role project level access control.
 context:
   project: '{{ item }}' # Only applied to project {{ item }}
 for:
@@ -42,11 +42,11 @@ for:
   node:
     - allow: [read, run] # allow read/run for all nodes
 by:
-  group: Rundeck-{{ item }}-Run
+  group: rundeck-{{ item }}-run
 ---
 
 
-description: Rundeck-{{ item }}-Read role project level access control.
+description: rundeck-{{ item }}-read role project level access control.
 context:
   project: '{{ item }}' # Only applied to project {{ item }}
 for:
@@ -69,11 +69,11 @@ for:
   node:
     - allow: [read] # allow read/run for all nodes
 by:
-  group: Rundeck-{{ item }}-Read
+  group: rundeck-{{ item }}-read
 ---
 
 
-description: Rundeck-{{ item }}-Write role project level access control.
+description: rundeck-{{ item }}-write role project level access control.
 context:
   project: '{{ item }}' # Only applied to project {{ item }}
 for:
@@ -94,10 +94,10 @@ for:
   node:
     - allow: '*'
 by:
-  group: Rundeck-{{ item }}-Write
+  group: rundeck-{{ item }}-write
 ---
 
-description: Rundeck-{{ item }}-Admin role project level access control.
+description: rundeck-{{ item }}-admin role project level access control.
 context:
   application: 'rundeck'
 for:
@@ -106,4 +106,4 @@ for:
         name: '{{ item }}'
       allow: [read,import,export,configure,admin] # allow full access of all projects or use 'admin'
 by:
-  group: Rundeck-{{ item }}-Admin
+  group: rundeck-{{ item }}-admin

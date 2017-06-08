@@ -1,4 +1,4 @@
-description: Rundeck-Admin role project level access control.
+description: rundeck-admin role project level access control.
 context:
   project: '.*' # all projects
 for:
@@ -19,11 +19,11 @@ for:
   node:
     - allow: [read,run] # allow read/run for nodes
 by:
-  group: Rundeck-Admin
+  group: rundeck-admin
 
 ---
 
-description: Rundeck-Admin role aplication level access control.
+description: rundeck-admin role aplication level access control.
 context:
   application: 'rundeck'
 for:
@@ -63,4 +63,4 @@ for:
       allow: [read,create,update] # allow access for /ssh-key/* storage content
 
 by:
-  group: Rundeck-Admin
+  group: rundeck-admin

@@ -49,9 +49,21 @@
     - framework.properties
     - rundeck-config.groovy
     - realm.properties
-    - jaas-loginmodule.conf
     - log4j.properties
   notify: restart rundeckd
+  tags:
+    - rundeck-login-module
+
+- name: modify login module config
+  template:
+    src: "jaas-{{ rd_login_module }}.conf.j2"
+    dest: "/etc/rundeck/jaas-loginmodule.conf"
+    owner: rundeck
+    group: rundeck
+    mode: 0640
+  notify: restart rundeckd
+  tags:
+    - rundeck-login-module
 
 - name: modify config that not require restart
   template:
@@ -62,7 +74,7 @@
     mode: 0640
   with_items:
     - admin.aclpolicy
-    - RundeckAdmin.aclpolicy
+    - rundeckadmin.aclpolicy
     - apitoken.aclpolicy
     - hipchat_default.ftl
 
