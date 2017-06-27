@@ -1,5 +1,5 @@
-ldap {
-    com.dtolabs.rundeck.jetty.jaas.JettyCachingLdapLoginModule required
+multiauth {
+    com.dtolabs.rundeck.jetty.jaas.JettyCachingLdapLoginModule sufficient
       debug="{{ rd_ldap.debug }}"
       contextFactory="com.sun.jndi.ldap.LdapCtxFactory"
       providerUrl="{{ rd_ldap.providerurl }}"
@@ -22,4 +22,7 @@ ldap {
       timeoutRead="{{ rd_ldap.timeoutread }}"
       timeoutConnect="{{ rd_ldap.timeoutconnect }}"
       nestedGroups="{{ rd_ldap.nestedgroups }}";
+    org.eclipse.jetty.plus.jaas.spi.PropertyFileLoginModule required
+      debug="true"
+      file="/etc/rundeck/realm.properties";
 };
