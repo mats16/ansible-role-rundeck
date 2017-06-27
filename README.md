@@ -48,7 +48,7 @@ rd_nginx_accesslog: /var/log/nginx/rundeck-access.log
 
 # LDAP
 
-rd_login_module: ldap
+rd_login_module: multiauth
 rd_ldap:
     debug: "true"
     contextfactory: com.sun.jndi.ldap.LdapCtxFactory

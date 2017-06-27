@@ -28,8 +28,8 @@ fi
 export CLI_CP=$(find /var/lib/rundeck/cli -name \*.jar -printf %p:)
 export BOOTSTRAP_CP=$(find /var/lib/rundeck/bootstrap -name \*.jar -printf %p:)
 export RDECK_JVM="-Djava.security.auth.login.config=/etc/rundeck/jaas-loginmodule.conf \
-{% if rd_login_module == 'ldap' %}
-       -Dloginmodule.name=ldap \
+{% if rd_login_module %}
+       -Dloginmodule.name={{ rd_login_module }} \
 {% else %}
        -Dloginmodule.name=RDpropertyfilelogin \
 {% endif %}
