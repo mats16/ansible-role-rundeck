@@ -22,6 +22,13 @@
 #
 # This sets the default user accounts for the Rundeck app
 #
-admin:admin,user,admin,architect,deploy,build
+admin:MD5:{{ admin_password|hash('md5') }},{{rd_default_group_name}},admin
 #@jetty.user.deploy.name@:@jetty.user.deploy.password@,user,deploy
 #@jetty.user.build.name@:@jetty.user.build.password@,user,build
+
+#
+# Created users by ansible playbook
+#
+{% for user in rd_create_users %}
+{{user.name}}:MD5:{{ user.password|hash('md5') }},{{rd_default_group_name}},{{ user.groups | join(',') }}
+{% endfor %}

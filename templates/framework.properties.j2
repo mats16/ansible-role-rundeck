@@ -5,15 +5,18 @@
 # Rundeck server connection information
 # ----------------------------------------------------------------
 
-framework.server.name = localhost
-framework.server.hostname = localhost
+framework.server.name = {{ framework_server_name }}
+framework.server.hostname = {{ framework_server_hostname }}
 framework.server.port = {{ framework_server_port }}
 framework.server.url = {{ framework_server_url }}
+
 # Username/password used by CLI tools.
 framework.server.username = {{ framework_server_username }}
+{% if framework_server_password %}
 framework.server.password = {{ framework_server_password }}
+{% endif %}
 
-rundeck.server.uuid = 00000000-0000-0000-0000-000000000000
+rundeck.server.uuid = {{ rundeck_server_uuid }}
 
 # ----------------------------------------------------------------
 # Installation locations
@@ -27,6 +30,26 @@ framework.var.dir=/var/lib/rundeck/var
 framework.tmp.dir=/var/lib/rundeck/var/tmp
 framework.logs.dir=/var/lib/rundeck/logs
 framework.libext.dir=/var/lib/rundeck/libext
+
+# ----------------------------------------------------------------
+# Email settings
+# ----------------------------------------------------------------
+# recipient addresses to send email (comma separated)
+framework.email.tolist = {{ rd_email_default_to }}
+# email address appearing in message "from" field
+framework.email.from = {{ rd_email_from }}
+# email address replies should go
+framework.email.replyto = {{ rd_email_from }}
+
+# The rdeck email relay host. must be a functioning smtp relay server
+framework.email.mailhost = {{ rd_email_host }}
+framework.email.mailport = {{ rd_email_port }}
+
+# User/pass info if the smtp server requires it
+framework.email.user = {{ rd_email_user }}
+framework.email.password = {{ rd_email_password }}
+framework.email.ssl = true
+framework.email.failonerror = true
 
 # ----------------------------------------------------------------
 # SSH defaults for node executor and file copier
@@ -51,3 +74,11 @@ framework.plugin.ExecutionFileStorage.org.rundeck.amazon-s3.path={{ rundeck_s3_p
 
 #  AWS region name
 framework.plugin.ExecutionFileStorage.org.rundeck.amazon-s3.region={{ rundeck_s3_region }}
+
+{% if hipchat_token %}
+# ----------------------------------------------------------------
+# Hipchat plugin configurations
+# ----------------------------------------------------------------
+framework.plugin.Notification.HipChatNotification.apiAuthToken={{ hipchat_token }}
+framework.plugin.Notification.HipChatNotification.messageTemplateLocation={{ hipchat_template }}
+{% endif %}

@@ -1,0 +1,109 @@
+description: rundeck-{{ item }}-[run, read, write] role aplication level access control.
+context:
+  application: 'rundeck'
+for:
+  project:
+    - match:
+        name: '{{ item }}'
+      allow: 'read'
+  storage:
+    - match:
+        name: '.*'
+      deny: [delete] # Deny delete in files storage
+    - match:
+        name: '.*'
+      allow: [read] # allow read for /ssh-key/* storage content
+
+by:
+  group: [rundeck-{{ item }}-run, rundeck-{{ item }}-read, rundeck-{{ item }}-write]
+---
+
+
+description: rundeck-{{ item }}-run role project level access control.
+context:
+  project: '{{ item }}' # Only applied to project {{ item }}
+for:
+  resource:
+    - equals:
+        kind: job
+      allow: [read,run]
+    - equals:
+        kind: node
+      allow: [read, refresh]
+    - equals:
+        kind: event
+      allow: [read] # allow read events
+  adhoc:
+    - allow: [read] # deny running/killing adhoc jobs
+  job:
+    - match:
+        group: '.*'
+      allow: [read, run, kill]
+  node:
+    - allow: [read, run] # allow read/run for all nodes
+by:
+  group: rundeck-{{ item }}-run
+---
+
+
+description: rundeck-{{ item }}-read role project level access control.
+context:
+  project: '{{ item }}' # Only applied to project {{ item }}
+for:
+  resource:
+    - equals:
+        kind: job
+      allow: [read]
+    - equals:
+        kind: node
+      allow: [read]
+    - equals:
+        kind: event
+      allow: [read] # allow read events
+  adhoc:
+    - allow: [read] # deny running/killing adhoc jobs
+  job:
+    - match:
+        group: '.*'
+      allow: [read]
+  node:
+    - allow: [read] # allow read/run for all nodes
+by:
+  group: rundeck-{{ item }}-read
+---
+
+
+description: rundeck-{{ item }}-write role project level access control.
+context:
+  project: '{{ item }}' # Only applied to project {{ item }}
+for:
+  resource:
+    - equals:
+        kind: job
+      allow: '*'
+    - equals:
+        kind: node
+      allow: '*'
+    - equals:
+        kind: event
+      allow: '*'
+  adhoc:
+    - allow: '*'
+  job:
+    - allow: '*'
+  node:
+    - allow: '*'
+by:
+  group: rundeck-{{ item }}-write
+---
+
+description: rundeck-{{ item }}-admin role project level access control.
+context:
+  application: 'rundeck'
+for:
+  project:
+    - match:
+        name: '{{ item }}'
+      allow: [read,import,export,configure,admin] # allow full access of all projects or use 'admin'
+by:
+  group: rundeck-{{ item }}-admin
