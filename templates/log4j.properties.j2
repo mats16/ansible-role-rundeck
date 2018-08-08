@@ -46,11 +46,11 @@ log4j.additivity.org.rundeck.storage.events=false
 #log4j.additivity.org.hibernate=false
 
 # Enable this logger to see what Spring does, occasionally useful
-#log4j.logger.org.springframework=info,stdout
+#log4j.logger.org.springframework=info,stdout 
 #log4j.additivity.org.springframework=false
 
 # This logger covers all of Grails' internals
-# Enable to see whats going on underneath.
+# Enable to see whats going on underneath. 
 log4j.logger.org.codehaus.groovy.grails=warn,stdout, server-logger
 log4j.additivity.org.codehaus.groovy.grails=false
 
@@ -58,15 +58,15 @@ log4j.additivity.org.codehaus.groovy.grails=false
 # configures with Spring at runtime. Setting to debug will show
 # each bean that is configured
 log4j.logger.org.codehaus.groovy.grails.commons.spring=warn,stdout, server-logger
-log4j.additivity.org.codehaus.groovy.grails.commons.spring=false
-
+log4j.additivity.org.codehaus.groovy.grails.commons.spring=false  
+                          
 # Interesting Logger to see what some of the Grails factory beans are doing
 log4j.logger.org.codehaus.groovy.grails.beans.factory=warn,stdout, server-logger
 log4j.additivity.org.codehaus.groovy.grails.beans.factory=false
 
 # This logger is for Grails' public APIs within the grails. package
 log4j.logger.grails=info,stdout, server-logger
-log4j.additivity.grails=false
+log4j.additivity.grails=false        
 
 
 ####################################################################################################
@@ -96,7 +96,7 @@ log4j.appender.cmd-logger.layout.ConversionPattern=%d{ISO8601} [%t] %-5p %c - %m
 
 #
 # server-logger - DailyRollingFileAppender
-#
+# 
 # Captures all output from the rundeckd server.
 #
 log4j.appender.server-logger=org.apache.log4j.DailyRollingFileAppender
@@ -107,8 +107,8 @@ log4j.appender.server-logger.layout=org.apache.log4j.PatternLayout
 log4j.appender.server-logger.layout.ConversionPattern=%d{ISO8601} [%t] %-5p %c - %m%n
 
 #
-# audit
-#
+# audit 
+# 
 # Captures all audit events.
 #
 log4j.appender.audit=org.apache.log4j.DailyRollingFileAppender

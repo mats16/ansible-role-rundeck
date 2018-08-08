@@ -6,7 +6,7 @@
 
 - name: modify ~/.my.cnf
   template:
-    src: mysql/my.cnf
+    src: mysql/my.cnf.j2
     dest: ~/.my.cnf
     mode: 0600
   when: "rd_mysql_host != 'localhost'"
