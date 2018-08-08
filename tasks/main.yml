@@ -124,3 +124,4 @@
   tags: rundeck-session-timeout
 
 - include: projects.yml
+  tags: rundeck-projects
